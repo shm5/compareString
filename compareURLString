@@ -1,0 +1,67 @@
+def singleString(text):
+    aSplit=text.split('&')
+    print ('URL的键值： ')
+    print (sorted(aSplit))
+    l=len(aSplit)
+    i=0
+    d={}
+    while i<l:
+        item=aSplit[i]
+        iSplit=item.split('=')
+        b=dict(zip(iSplit[0::2],iSplit[1::2]))
+        d.update(b)
+        i+=1
+    print ('\n')
+    print (sorted(d))
+
+def compareString(text1,text2):
+    aSplit1=text1.split('&')
+    aSplit2=text2.split('&')
+    print ('第一个URL键值： ')
+    print (sorted(aSplit1))
+    print ('\n')
+    print ('第二个URL键值： ')
+    print (sorted(aSplit2))
+    i=0
+    j=0
+    l1=len(aSplit1)
+    l2=len(aSplit2)
+    d1={}
+    d2={}
+    while i<l1:
+        item1=aSplit1[i]
+        iSplit1=item1.split('=')
+        a=dict(zip(iSplit1[0::2],iSplit1[1::2]))
+        d1.update(a)
+        i+=1
+    
+    while j<l2:
+        item2=aSplit2[j]
+        iSplit2=item2.split('=')
+        b=dict(zip(iSplit2[0::2],iSplit2[1::2]))
+        d2.update(b)
+        j+=1
+    
+    print ('\n')
+    m=set(d1.keys())-set(d2.keys())
+    n=set(d2.keys())-set(d1.keys())
+    print ('在第一个URL里，但不在第二个URL里： ')
+    print (sorted(m))
+    print ('\n')
+    print ('在第二个URL里，但不在第一个URL里： ')
+    print (sorted(n))
+    print ('\n')
+    print ('在第一个URL里，但不在第二个URL里 OR 在第二个URL里，但不在第一个URL里： ')
+    print (sorted(m|n))
+
+if __name__=='__main__':
+    inputKey=input('输入数字键0，解析一个URL；输入数字按键1，解析比较两个URL；其他按键退出程序： ')  
+    if inputKey=='0':
+        text=input('请输入一个URL：')
+        singleString(text)
+    elif inputKey=='1':
+        text1=input('请输入第一个URL： ')
+        text2=input('请输入第二个URL： ')
+        compareString(text1,text2)
+    else:
+        pass
